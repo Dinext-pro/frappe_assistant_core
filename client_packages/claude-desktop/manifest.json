@@ -1,0 +1,182 @@
+{
+  "dxt_version": "0.1",
+  "name": "claude-for-frappe",
+  "display_name": "Claude for Frappe ERP",
+  "version": "2.1.0",
+  "description": "AI-powered bridge connecting Claude Desktop to Frappe ERP via Frappe Assistant Core",
+  "long_description": "This extension creates an intelligent bridge between Claude Desktop and your Frappe ERP system through the Frappe Assistant Core app. Enable AI-powered data analysis, automated report generation, and natural language interactions with your business data.",
+  "author": {
+    "name": "Paul Clinton",
+    "email": "jypaulclinton@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clinu/Frappe_Assistant_Core"
+  },
+  "homepage": "https://github.com/clinu/Frappe_Assistant_Core",
+  "support": "https://github.com/clinu/Frappe_Assistant_Core/issues",
+  "icon": "icon.png",
+  "screenshots": [
+    "assets/screenshots/dashboard.png",
+    "assets/screenshots/analysis.png",
+    "assets/screenshots/reports.png"
+  ],
+  "keywords": [
+    "frappe",
+    "erp",
+    "business",
+    "data-analysis",
+    "ai",
+    "claude"
+  ],
+  "license": "MIT",
+  "server": {
+    "type": "python",
+    "entry_point": "server/frappe_assistant_stdio_bridge.py",
+    "mcp_config": {
+      "command": "python3",
+      "args": [
+        "${__dirname}/server/frappe_assistant_stdio_bridge.py"
+      ],
+      "platform_overrides": {
+        "win32": {
+          "command": "python"
+        }
+      },
+      "env": {
+        "FRAPPE_SERVER_URL": "${user_config.server_url}",
+        "FRAPPE_API_KEY": "${user_config.api_key}",
+        "FRAPPE_API_SECRET": "${user_config.api_secret}",
+        "MCP_DEBUG": "${user_config.debug_mode ? '1' : '0'}"
+      }
+    }
+  },
+  "user_config": {
+    "server_url": {
+      "type": "string",
+      "title": "Frappe Server URL",
+      "description": "Your Frappe instance URL",
+      "required": true
+    },
+    "api_key": {
+      "type": "string",
+      "title": "Frappe API Key",
+      "description": "Your Frappe API key",
+      "sensitive": true,
+      "required": true,
+      "min": 10
+    },
+    "api_secret": {
+      "type": "string",
+      "title": "Frappe API Secret",
+      "description": "Your Frappe API secret",
+      "sensitive": true,
+      "required": true,
+      "min": 10
+    },
+    "debug_mode": {
+      "type": "boolean",
+      "title": "Enable Debug Mode",
+      "description": "Enable debug logging",
+      "default": false,
+      "required": false
+    }
+  },
+  "tools": [
+    {
+      "name": "run_python_code",
+      "description": "⚡ ADVANCED PYTHON CODING - For complex analysis when reports and analysis tools aren't sufficient. Use only when both generate_report and analyze_business_data fail to meet your needs."
+    },
+    {
+      "name": "analyze_business_data",
+      "description": "📊 CUSTOM DATA ANALYSIS - When standard reports don't meet your specific needs. Use only after checking available reports first with report_list and generate_report."
+    },
+    {
+      "name": "run_database_query",
+      "description": "Execute custom SQL queries on Frappe database and perform advanced data analysis. Perfect for complex business intelligence and custom reporting"
+    },
+    {
+      "name": "create_visualization",
+      "description": "Create interactive charts and visualizations from Frappe business data. Charts are displayed inline and saved as files"
+    },
+    {
+      "name": "generate_report", 
+      "description": "🏆 PROFESSIONAL BUSINESS REPORTS - Your FIRST choice for sales analysis, financial reporting, and business intelligence! Execute pre-built business reports including Sales Analytics, P&L Statement, and 183+ other reports."
+    },
+    {
+      "name": "report_list",
+      "description": "🔍 DISCOVER BUSINESS REPORTS - Find the perfect report for your business question! Browse 183+ available reports across Selling, Accounts, Stock, and HR modules."
+    },
+    {
+      "name": "report_requirements", 
+      "description": "📋 REPORT REQUIREMENTS ANALYZER - Understand what you need before running reports! Discover required filters, prevent errors, and get comprehensive report structure analysis."
+    },
+    {
+      "name": "search_documents",
+      "description": "Global search across all accessible documents"
+    },
+    {
+      "name": "search_doctype",
+      "description": "Search within a specific DocType"
+    },
+    {
+      "name": "search_link",
+      "description": "Search for link field options"
+    },
+    {
+      "name": "get_doctype_info",
+      "description": "Get DocType metadata and field information"
+    },
+    {
+      "name": "list_documents",
+      "description": "Search and list Frappe documents with optional filtering. Primary tool for data exploration and discovery"
+    },
+    {
+      "name": "create_document",
+      "description": "Create a new Frappe document (e.g., Customer, Sales Invoice, Item, etc.). Add new records to the system"
+    },
+    {
+      "name": "get_document",
+      "description": "Retrieve detailed information about a specific Frappe document"
+    },
+    {
+      "name": "update_document",
+      "description": "Update/modify an existing Frappe document. Change field values in existing records"
+    },
+    {
+      "name": "delete_document",
+      "description": "Delete an existing Frappe document. Remove records from the system"
+    },
+    {
+      "name": "submit_document",
+      "description": "Submit a Frappe document to change its status from draft to submitted"
+    },
+    {
+      "name": "run_workflow",
+      "description": "Execute workflow actions on documents (start, approve, reject, etc.)"
+    },
+    {
+      "name": "create_dashboard",
+      "description": "Create custom dashboards for business intelligence and data visualization"
+    },
+    {
+      "name": "create_dashboard_chart",
+      "description": "Create dashboard charts for data visualization and business insights"
+    },
+    {
+      "name": "list_user_dashboards",
+      "description": "List all dashboards accessible to the current user"
+    }
+  ],
+  "tools_generated": true,
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtime": {
+      "python": ">=3.8.0"
+    }
+  }
+}

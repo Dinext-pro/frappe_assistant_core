@@ -1,0 +1,163 @@
+{
+ "actions": [],
+ "creation": "2025-06-21 22:45:07.030425",
+ "doctype": "DocType",
+ "document_type": "Setup",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "server_enabled",
+  "plugins_section",
+  "enabled_plugins_list",
+  "plugin_status_html",
+  "streaming_section",
+  "enforce_artifact_streaming",
+  "response_limit_prevention",
+  "streaming_behavior_instructions",
+  "streaming_line_threshold",
+  "streaming_char_threshold",
+  "sse_bridge_section",
+  "sse_bridge_warning",
+  "sse_bridge_enabled",
+  "sse_bridge_port",
+  "sse_bridge_host",
+  "sse_bridge_debug",
+  "sse_bridge_status_html"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "description": "Enable or disable the Frappe Assistant Core MCP server",
+   "fieldname": "server_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Assistant Core"
+  },
+  {
+   "fieldname": "plugins_section",
+   "fieldtype": "Section Break",
+   "label": "Plugin Configuration"
+  },
+  {
+   "default": "[\"core\"]",
+   "fieldname": "enabled_plugins_list",
+   "fieldtype": "JSON",
+   "hidden": 1,
+   "label": "Enabled Plugins"
+  },
+  {
+   "fieldname": "plugin_status_html",
+   "fieldtype": "HTML",
+   "label": "Plugin Status",
+   "options": "<div id=\"plugin-status-container\">Loading plugin information...</div>"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "streaming_section",
+   "fieldtype": "Section Break",
+   "label": "Artifact Streaming Configuration"
+  },
+  {
+   "default": "1",
+   "description": "Require all LLMs to use artifact streaming for analysis operations",
+   "fieldname": "enforce_artifact_streaming",
+   "fieldtype": "Check",
+   "label": "Enforce Artifact Streaming Protocol"
+  },
+  {
+   "default": "1",
+   "description": "Automatically promote artifact streaming to prevent LLM response limits",
+   "fieldname": "response_limit_prevention",
+   "fieldtype": "Check",
+   "label": "Enable Response Limit Prevention"
+  },
+  {
+   "default": "Always create analysis workspace artifacts before performing data analysis.\nStream all detailed work to artifacts to prevent response limits.\nKeep responses minimal with artifact references.\nBuild unlimited analysis depth via progressive artifact updates.",
+   "description": "Additional behavioral instructions for LLMs using the MCP server",
+   "fieldname": "streaming_behavior_instructions",
+   "fieldtype": "Small Text",
+   "label": "Custom Streaming Instructions"
+  },
+  {
+   "default": "5",
+   "description": "Number of lines in tool result that triggers artifact streaming",
+   "fieldname": "streaming_line_threshold",
+   "fieldtype": "Int",
+   "label": "Line Threshold for Streaming"
+  },
+  {
+   "default": "1000",
+   "description": "Number of characters in tool result that triggers artifact streaming",
+   "fieldname": "streaming_char_threshold",
+   "fieldtype": "Int",
+   "label": "Character Threshold for Streaming"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "sse_bridge_section",
+   "fieldtype": "Section Break",
+   "label": "SSE Bridge Configuration"
+  },
+  {
+   "fieldname": "sse_bridge_warning",
+   "fieldtype": "HTML",
+   "options": "<div class=\"alert alert-warning\" style=\"margin-bottom: 15px;\"><h6><i class=\"fa fa-exclamation-triangle\"></i> Experimental Feature</h6><p><strong>Important:</strong> The SSE Bridge is an experimental feature that:</p><ul><li><strong>Does not work on Frappe Cloud</strong> - Only available for self-hosted installations</li><li>May have stability issues and is subject to breaking changes</li><li>Requires manual port management and process monitoring</li><li>Is intended for development and testing environments</li></ul><p><small>For production use, consider using the standard MCP bridge instead.</small></p></div>"
+  },
+  {
+   "default": "1",
+   "description": "Enable or disable the SSE MCP Bridge for real-time communication",
+   "fieldname": "sse_bridge_enabled",
+   "fieldtype": "Check",
+   "label": "Enable SSE Bridge"
+  },
+  {
+   "default": "8080",
+   "description": "Port number for the SSE bridge server",
+   "fieldname": "sse_bridge_port",
+   "fieldtype": "Int",
+   "label": "SSE Bridge Port"
+  },
+  {
+   "default": "0.0.0.0",
+   "description": "Host address to bind the SSE bridge server",
+   "fieldname": "sse_bridge_host",
+   "fieldtype": "Data",
+   "label": "SSE Bridge Host"
+  },
+  {
+   "default": "0",
+   "description": "Enable debug mode for SSE bridge logging",
+   "fieldname": "sse_bridge_debug",
+   "fieldtype": "Check",
+   "label": "Enable SSE Bridge Debug Mode"
+  },
+  {
+   "fieldname": "sse_bridge_status_html",
+   "fieldtype": "HTML",
+   "label": "SSE Bridge Status",
+   "options": "<div id=\"sse-bridge-status-container\">Loading SSE bridge status...</div>"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-08-12 17:50:12.690254",
+ "modified_by": "Administrator",
+ "module": "Assistant Core",
+ "name": "Assistant Core Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
