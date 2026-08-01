@@ -85,13 +85,23 @@ jenv = {
 # ------------
 
 # before_install hooks can be added here if needed
-after_install = "frappe_assistant_core.utils.migration_hooks.after_install"
+
+after_install = [
+    "frappe_assistant_core.utils.migration_hooks.after_install",
+    "frappe_assistant_core.utils.email_invite.send_fac_admin_invite",
+    "frappe_assistant_core.utils.model_warmup.warm_paddleocr_models",
+]
+
 
 # Uninstallation
 # ------------
 
 # before_uninstall = "frappe_assistant_core.uninstall.before_uninstall"
 after_uninstall = "frappe_assistant_core.utils.migration_hooks.after_uninstall"
+
+# Fired before ANY app is uninstalled (including other apps). Used to clean up
+# FAC Skill rows registered by that app via its assistant_skills hook.
+before_app_uninstall = "frappe_assistant_core.utils.migration_hooks.before_app_uninstall"
 
 # Desk Notifications
 # ------------------
@@ -104,7 +114,9 @@ after_uninstall = "frappe_assistant_core.utils.migration_hooks.after_uninstall"
 # Permissions evaluated in scripted ways
 
 permission_query_conditions = {
-    "Assistant Audit Log": "frappe_assistant_core.utils.permissions.get_audit_permission_query_conditions"
+    "Assistant Audit Log": "frappe_assistant_core.utils.permissions.get_audit_permission_query_conditions",
+    "Prompt Template": "frappe_assistant_core.utils.permissions.get_prompt_permission_query_conditions",
+    "FAC Skill": "frappe_assistant_core.utils.permissions.get_skill_permission_query_conditions",
 }
 
 # has_permission = {
@@ -124,11 +136,6 @@ permission_query_conditions = {
 # Hook on document methods and events
 
 doc_events = {
-    "*": {
-        "on_update": "frappe_assistant_core.utils.audit_trail.log_document_change",
-        "on_submit": "frappe_assistant_core.utils.audit_trail.log_document_submit",
-        "on_cancel": "frappe_assistant_core.utils.audit_trail.log_document_cancel",
-    },
     "Assistant Core Settings": {"on_update": "frappe_assistant_core.utils.cache.invalidate_settings_cache"},
     "Assistant Audit Log": {"after_insert": "frappe_assistant_core.utils.cache.invalidate_dashboard_cache"},
 }
@@ -152,9 +159,12 @@ scheduler_events = {
 # Overriding Methods
 # ------------------------------
 #
-# Override Frappe's OAuth endpoint to add MCP-required fields
+# Override Frappe's OAuth endpoints
+# - openid_configuration: Add MCP-required fields
+# - get_token: Properly handle Basic auth for client authentication
 override_whitelisted_methods = {
-    "frappe.integrations.oauth2.openid_configuration": "frappe_assistant_core.api.oauth_discovery.openid_configuration"
+    "frappe.integrations.oauth2.openid_configuration": "frappe_assistant_core.api.oauth_discovery.openid_configuration",
+    "frappe.integrations.oauth2.get_token": "frappe_assistant_core.api.oauth_token.get_token",
 }
 
 # Custom Page Renderers
@@ -257,6 +267,8 @@ after_migrate = [
 fixtures = [
     {"doctype": "Custom Field", "filters": {"dt": "User", "fieldname": ["in", ["assistant_enabled"]]}},
     {"doctype": "Role", "filters": {"role_name": ["in", ["Assistant User", "Assistant Admin"]]}},
+    # System prompt templates - these are installed via after_migrate hook
+    # because they require special handling for child table data (arguments)
 ]
 
 # Enhanced Plugin Architecture
