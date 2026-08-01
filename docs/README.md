@@ -25,7 +25,7 @@ Quick start guides and setup instructions for new users:
 
 System design, technical architecture, and implementation details:
 
-- **[Architecture Overview](architecture/ARCHITECTURE.md)** - System design and plugin architecture
+- **[Architecture Overview](internals/INTERNALS.md)** - System design and plugin architecture
 - **[MCP StreamableHTTP Guide](architecture/MCP_STREAMABLEHTTP_GUIDE.md)** - OAuth + StreamableHTTP integration
 - **[Technical Documentation](architecture/TECHNICAL_DOCUMENTATION.md)** - Complete technical reference
 - **[Performance Guide](architecture/PERFORMANCE.md)** - Optimization and monitoring
@@ -41,12 +41,23 @@ Complete API documentation and tool references:
 
 ---
 
+### 📋 [Guides](guides/)
+
+User guides for administrators managing the system:
+
+- **[Tool Management Guide](guides/TOOL_MANAGEMENT_GUIDE.md)** - Enable/disable tools, configure role-based access
+- **[Plugin Management Guide](guides/PLUGIN_MANAGEMENT_GUIDE.md)** - Enable/disable plugins, manage tool groups
+- **[Skills User Guide](guides/SKILLS_USER_GUIDE.md)** - Create, publish, and share markdown skills that teach the LLM how to use your tools
+
+---
+
 ### 🛠️ [Development](development/)
 
 Guides for developers building custom tools and plugins:
 
 - **[Development Guide](development/DEVELOPMENT_GUIDE.md)** - Create custom tools and plugins
 - **[External App Development](development/EXTERNAL_APP_DEVELOPMENT.md)** - Create tools in your Frappe apps (recommended)
+- **[Skills Developer Guide](development/SKILLS_DEVELOPER_GUIDE.md)** - Ship markdown skills with your Frappe app via the `assistant_skills` hook
 - **[Plugin Development](development/PLUGIN_DEVELOPMENT.md)** - Create internal plugins for core features
 - **[Test Case Creation Guide](development/TEST_CASE_CREATION_GUIDE.md)** - Testing patterns and best practices
 - **[OAuth CORS Configuration](development/OAUTH_CORS_CONFIGURATION.md)** - CORS setup for MCP Inspector (development only)
@@ -73,7 +84,7 @@ Additional resources and references:
 3. Explore [Tool Reference](api/TOOL_REFERENCE.md) to see what's possible
 
 **👨‍💻 Developers:**
-1. Review [Architecture Overview](architecture/ARCHITECTURE.md)
+1. Review [Architecture Overview](internals/INTERNALS.md)
 2. Study [Development Guide](development/DEVELOPMENT_GUIDE.md)
 3. Check [API Reference](api/API_REFERENCE.md) for integration details
 
@@ -92,12 +103,17 @@ Additional resources and references:
 **MCP Protocol:**
 - [MCP StreamableHTTP Guide](architecture/MCP_STREAMABLEHTTP_GUIDE.md)
 - [API Reference](api/API_REFERENCE.md)
-- [Architecture Overview](architecture/ARCHITECTURE.md)
+- [Architecture Overview](internals/INTERNALS.md)
 
 **Tool Development:**
 - [Development Guide](development/DEVELOPMENT_GUIDE.md)
 - [External App Development](development/EXTERNAL_APP_DEVELOPMENT.md)
 - [Plugin Development](development/PLUGIN_DEVELOPMENT.md)
+
+**Tool & Plugin Management:**
+- [Tool Management Guide](guides/TOOL_MANAGEMENT_GUIDE.md) - Enable/disable tools, role-based access
+- [Plugin Management Guide](guides/PLUGIN_MANAGEMENT_GUIDE.md) - Enable/disable plugins
+- [Architecture Overview](internals/INTERNALS.md) - System design
 
 ---
 
